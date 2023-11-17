@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.nio.file.Files;
+import java.util.Objects;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import java.security.MessageDigest;
@@ -50,8 +51,6 @@ public class UserController {
   /**
    * Attribut permettant d'utiliser le système de log "slf4j" (API de
    * journalisation Java)
-   * Pour plus d'informations sur slf4j ->
-   * https://www.baeldung.com/slf4j-with-log4j2-logback
    */
   Logger logger = LoggerFactory.getLogger(FileStorageService.class);
 
@@ -73,7 +72,7 @@ public class UserController {
         String storageHash = getStorageHash(imageFile).get();
         Path rootLocation = this.fileStorageService.getRootLocation();
         // récupération de l'extension
-        String fileExtension = mimeTypeToExtension(imageFile.getContentType());
+        String fileExtension = mimeTypeToExtension(Objects.requireNonNull(imageFile.getContentType()));
         // ajout de l'extension au nom du fichier
         storageHash = storageHash + fileExtension;
         // on retrouve le chemin de stockage de l'image
@@ -140,16 +139,19 @@ public class UserController {
 
     if (userOptional.isPresent()) {
       UsersEntity user = userOptional.get();
-      user.setIdPartenaire(user.getPartenaire().getId());
 
-      if (user != null) {
-        return ResponseEntity.ok(user);
+      if (user.getPartenaire() != null) {
+        user.setIdPartenaire(user.getPartenaire().getId());
       }
+
+      return ResponseEntity.ok(user);
     }
+
     return ResponseEntity
-        .status(HttpStatus.NOT_FOUND)
-        .body("Utilisateur introuvable");
+            .status(HttpStatus.NOT_FOUND)
+            .body("Utilisateur introuvable");
   }
+
 
   @GetMapping("/{userId}/partenaire")
   public ResponseEntity<String> getPartenaireNameByUserId(
@@ -250,8 +252,6 @@ public class UserController {
 
   /**
    * Retourne l'extension d'un fichier en fonction d'un type MIME
-   * pour plus d'informations sur les types MIME :
-   * https://developer.mozilla.org/fr/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
    */
   private String mimeTypeToExtension(String mimeType) {
     return switch (mimeType) {
@@ -265,9 +265,7 @@ public class UserController {
   /**
    * Permet de retrouver un hash qui pourra être utilisé comme nom de fichier
    * uniquement pour le stockage.
-   *
    * Le hash sera calculé à partir du nom du fichier, de son type MIME
-   * (https://developer.mozilla.org/fr/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types)
    * et de la date d'upload.
    *
    * @return Le hash encodé en base64
@@ -284,8 +282,8 @@ public class UserController {
         // tableau d'octets
         // Nous utiliserons la classe "ByteArrayOutputStream" pour se faire
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        outputStream.write(file.getOriginalFilename().getBytes());
-        outputStream.write(file.getContentType().getBytes());
+        outputStream.write(Objects.requireNonNull(file.getOriginalFilename()).getBytes());
+        outputStream.write(Objects.requireNonNull(file.getContentType()).getBytes());
         LocalDate date = LocalDate.now();
         outputStream.write(date.toString().getBytes());
 
