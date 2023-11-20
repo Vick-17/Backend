@@ -22,4 +22,7 @@ public class MatchEntity {
     @Column(name = "film_id")
     private Long filmId;
 
+    @Column(name = "is_watched")
+    private boolean isWatched;
+
 }
