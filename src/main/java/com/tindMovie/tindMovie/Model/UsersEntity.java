@@ -21,12 +21,9 @@ public class UsersEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  private String name;
-  private int age;
   private String email;
   private String password;
   private String username;
-  private String country;
   private Long IdPartenaire;
 
   @Column(name = "image_name")
