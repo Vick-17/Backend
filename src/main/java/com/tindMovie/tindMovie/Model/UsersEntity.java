@@ -35,6 +35,7 @@ public class UsersEntity {
    * Attention, le contenu du fichier est stocké de manière temporaire (en mémoire
    * ou sur le disque)
    */
+  @Getter
   @JsonIgnore
   @Transient
   private MultipartFile imageFile;
@@ -52,10 +53,6 @@ public class UsersEntity {
 
   public void setImageFile(MultipartFile imageFile) {
     this.imageFile = imageFile;
-  }
-
-  public MultipartFile getImageFile() {
-    return imageFile;
   }
 
 }
