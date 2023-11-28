@@ -30,7 +30,6 @@ public class SwipeController {
     @Autowired
     private MovieRepository movieRepository;
 
-    @CrossOrigin
     @PostMapping(value = "/like")
     @ResponseStatus(HttpStatus.CREATED)
     public SwipeEntity createSwipe(@RequestBody SwipeEntity swipe) {
@@ -69,7 +68,6 @@ public class SwipeController {
 
     @DeleteMapping("/delete")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @CrossOrigin
     public ResponseEntity<Void> deleteSwipe(@RequestBody SwipeEntity swipe) {
         // Recherche du swipe à suprimmer
         Optional<SwipeEntity> optionalSwipe = swipeRepository.findByUserIdAndFilmId(swipe.getUserId(), swipe.getFilmId());
@@ -87,7 +85,6 @@ public class SwipeController {
 
     @GetMapping("/allSwipe/{userId}")
     @ResponseStatus(HttpStatus.OK)
-    @CrossOrigin
     public List<MovieEntity> getAllSwipeByUser(@PathVariable Long userId) {
         if (userId == null) {
             throw new RuntimeException("user_id est absent");
@@ -110,7 +107,6 @@ public class SwipeController {
 
     @GetMapping("/watchedMovie/{userId}")
     @ResponseStatus(HttpStatus.OK)
-    @CrossOrigin
     public List<MovieEntity> getAllWatchedMovieByUser(@PathVariable Long userId) {
         if (userId == null) {
             throw new RuntimeException("user_id est absent");
@@ -132,7 +128,6 @@ public class SwipeController {
     }
 
     @PutMapping("/watched")
-    @CrossOrigin
     public ResponseEntity<Void> movieWatch(@RequestBody SwipeEntity swipe) {
         try {
             // Recherche du swipe en fonction de l'ID de l'utilisateur et de l'ID du film

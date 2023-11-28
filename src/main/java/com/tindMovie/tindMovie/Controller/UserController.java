@@ -57,7 +57,6 @@ public class UserController {
   @Autowired
   private FileStorageService fileStorageService;
 
-  @CrossOrigin
   @PostMapping(value = "/stations", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
   @ResponseStatus(HttpStatus.OK)
   public UsersEntity post(@ModelAttribute UsersEntity user) {
@@ -120,7 +119,6 @@ public class UserController {
   }
 
   @GetMapping
-  @CrossOrigin
   @ResponseStatus(HttpStatus.OK)
   public ResponseEntity<Long> findUserIdByEmail(@RequestParam String email) {
     UsersEntity user = userRepository.findByEmail(email);
@@ -133,7 +131,6 @@ public class UserController {
 
 
   @GetMapping("/getUserById/{userId}")
-  @CrossOrigin
   public ResponseEntity<?> getUserById(@PathVariable Long userId) {
     Optional<UsersEntity> userOptional = userRepository.findById(userId);
 
@@ -172,7 +169,6 @@ public class UserController {
     }
   }
 
-  @CrossOrigin
   @PostMapping(value = "/inscription", consumes = "application/json")
   @ResponseStatus(HttpStatus.CREATED)
   public UsersEntity createUser(@RequestBody UsersEntity users) {
@@ -199,7 +195,6 @@ public class UserController {
     return userRepository.save(users);
   }
 
-  @CrossOrigin
   @PutMapping("/link")
   public ResponseEntity<String> linkUsers(
       @RequestParam String shareCode,

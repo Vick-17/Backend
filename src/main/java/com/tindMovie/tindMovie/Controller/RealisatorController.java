@@ -21,14 +21,12 @@ public class RealisatorController {
     public RealisatorController(RealisatorRepository realisatorRepository) {
         this.realisatorRepository = realisatorRepository;
     }
-    
-    // @CrossOrigin
+
     // @GetMapping("/{realisatorId}/realisator-filmography")
     // public List<MovieEntity> getRealFilmography(@PathVariable Long realisatorId) {
     //     return realisatorService.getFilmographyForRealisator(realisatorId);
     // }
 
-    @CrossOrigin
     @GetMapping("/allRealisator")
     public Iterable<RealisatorEntity> getAllRealisator() {
         return realisatorRepository.findAll();

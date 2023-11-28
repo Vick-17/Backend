@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/match")
 public class MatchController {
 
@@ -24,7 +23,6 @@ public class MatchController {
     @Autowired
     private MovieRepository movieRepository;
 
-    @CrossOrigin
     @GetMapping(value = "/matchByUser/{userId1}/{userId2}")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<List<MovieEntity>> getMatchByUser(@PathVariable Long userId1, @PathVariable Long userId2) {
@@ -54,7 +52,6 @@ public class MatchController {
 
 
 //    @PutMapping("/watchedMatch")
-//    @CrossOrigin
 //    public ResponseEntity<Void> setMovieWatch(@RequestBody MatchEntity match) {
 //        try {
 //            // Recherche du swipe en fonction de l'ID de l'utilisateur et de l'ID du film
