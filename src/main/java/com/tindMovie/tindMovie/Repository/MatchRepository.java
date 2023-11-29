@@ -1,7 +1,6 @@
 package com.tindMovie.tindMovie.Repository;
 
 import com.tindMovie.tindMovie.Model.MatchEntity;
-import com.tindMovie.tindMovie.Model.SwipeEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

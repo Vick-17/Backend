@@ -3,10 +3,10 @@ package com.tindMovie.tindMovie.Controller;
 import com.tindMovie.tindMovie.Model.ActorEntity;
 import com.tindMovie.tindMovie.Model.MovieEntity;
 import com.tindMovie.tindMovie.Model.NoteEntity;
-import com.tindMovie.tindMovie.Model.SwipeEntity;
+import com.tindMovie.tindMovie.Model.LikeEntity;
 import com.tindMovie.tindMovie.Repository.MovieRepository;
 import com.tindMovie.tindMovie.Repository.NoteRepository;
-import com.tindMovie.tindMovie.Repository.SwipeRepository;
+import com.tindMovie.tindMovie.Repository.LikeRepository;
 import com.tindMovie.tindMovie.Service.ActorService;
 import com.tindMovie.tindMovie.Service.AlgoService;
 import com.tindMovie.tindMovie.Service.MovieSearchService;
@@ -28,7 +28,7 @@ public class MovieController {
   private MovieRepository movieRepository;
 
   @Autowired
-  private SwipeRepository swipeRepository;
+  private LikeRepository likeRepository;
 
   @Autowired
   private ActorService actorService;
@@ -73,11 +73,11 @@ public class MovieController {
       .stream(allIterableMovies.spliterator(), false)
       .toList();
 
-    List<SwipeEntity> swipesByUser = swipeRepository.findByUserId(userId);
+    List<LikeEntity> swipesByUser = likeRepository.findByUserId(userId);
 
     List<Long> movieSwipedIds = swipesByUser
       .stream()
-      .map(SwipeEntity::getFilmId)
+      .map(LikeEntity::getFilmId)
       .toList();
 
     return allMovies
