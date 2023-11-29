@@ -13,11 +13,8 @@ public class LikeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "liked")
+    @Column(name = "is_liked")
     private boolean liked;
-
-    @Column(name = "not_liked")
-    private boolean notLiked;
 
     @Column(name = "swipe_direction")
     private String swipeDirection;

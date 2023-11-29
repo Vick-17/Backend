@@ -36,12 +36,10 @@ public class LikeController {
 
         if (!likeRepository.existsByUserIdAndFilmId(swipe.getUserId(), swipe.getFilmId())) {
             if ("left".equals((swipe.getSwipeDirection()))) {
-                swipe.setNotLiked(true);
-                swipe.setLiked(false);
+                swipe.setLiked(true);
 
             } else if ("right".equals(swipe.getSwipeDirection())) {
-                swipe.setLiked(true);
-                swipe.setNotLiked(false);
+                swipe.setLiked(false);
             }
 
             likeRepository.save(swipe);
