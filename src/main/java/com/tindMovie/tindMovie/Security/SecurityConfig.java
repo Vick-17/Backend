@@ -56,10 +56,10 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/match/**").hasAnyAuthority("ROLE_USER", "ROLE_MODO")
                         .requestMatchers(HttpMethod.PUT, "/users/**").hasAnyAuthority("ROLE_USER", "ROLE_MODO")
                         .requestMatchers(HttpMethod.POST, "/note/**").hasAnyAuthority("ROLE_USER", "ROLE_MODO")
-                        .requestMatchers(HttpMethod.POST, "/swipe/**").hasAnyAuthority("ROLE_USER", "ROLE_MODO")
-                        .requestMatchers(HttpMethod.GET, "/swipe/**").hasAnyAuthority("ROLE_USER", "ROLE_MODO")
-                        .requestMatchers(HttpMethod.PUT, "/swipe/**").hasAnyAuthority("ROLE_USER", "ROLE_MODO")
-                        .requestMatchers(HttpMethod.DELETE, "/swipe/**").hasAnyAuthority("ROLE_USER", "ROLE_MODO")
+                        .requestMatchers(HttpMethod.POST, "/like/**").hasAnyAuthority("ROLE_USER", "ROLE_MODO")
+                        .requestMatchers(HttpMethod.GET, "/like/**").hasAnyAuthority("ROLE_USER", "ROLE_MODO")
+                        .requestMatchers(HttpMethod.PUT, "/like/**").hasAnyAuthority("ROLE_USER", "ROLE_MODO")
+                        .requestMatchers(HttpMethod.DELETE, "/like/**").hasAnyAuthority("ROLE_USER", "ROLE_MODO")
                         .requestMatchers(HttpMethod.POST, "/comment/**").hasAnyAuthority("ROLE_USER", "ROLE_MODO")
                         .requestMatchers(HttpMethod.POST, "/actors/**").hasAnyAuthority("ROLE_USER", "ROLE_MODO")
                         .requestMatchers(HttpMethod.PUT, "/actors/**").hasAnyAuthority("ROLE_USER", "ROLE_MODO")
@@ -77,7 +77,7 @@ public class SecurityConfig {
 
     private CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("https://tind-movie.vercel.app/"));
+        configuration.setAllowedOrigins(List.of("https://tind-movie.vercel.app/", "http://localhost:3000/"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowedMethods(List.of("*"));
         configuration.setExposedHeaders(List.of("access_token"));

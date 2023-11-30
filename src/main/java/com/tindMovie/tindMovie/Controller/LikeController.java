@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/swipe")
+@RequestMapping("/like")
 public class LikeController {
 
     @Autowired
@@ -30,16 +30,16 @@ public class LikeController {
     @Autowired
     private MovieRepository movieRepository;
 
-    @PostMapping(value = "/like")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public LikeEntity createSwipe(@RequestBody LikeEntity swipe) {
 
         if (!likeRepository.existsByUserIdAndFilmId(swipe.getUserId(), swipe.getFilmId())) {
             if ("left".equals((swipe.getSwipeDirection()))) {
-                swipe.setLiked(true);
+                swipe.setLiked(false);
 
             } else if ("right".equals(swipe.getSwipeDirection())) {
-                swipe.setLiked(false);
+                swipe.setLiked(true);
             }
 
             likeRepository.save(swipe);
@@ -81,24 +81,19 @@ public class LikeController {
         }
     }
 
-    @GetMapping("/allSwipe/{userId}")
+    @GetMapping("/alLike/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public List<MovieEntity> getAllSwipeByUser(@PathVariable Long userId) {
         if (userId == null) {
             throw new RuntimeException("user_id est absent");
         } else {
-            // Récupére le swipe de l'utilisateur
             List<LikeEntity> userSwipe = likeRepository.findByUserId(userId);
-
             List<Long> likedFilmIds = new ArrayList<>();
-
-            // Parcour les swipes pour extraire les ID des films likés
             for (LikeEntity swipe : userSwipe) {
                 if (swipe.isLiked() && !swipe.isWatched()) {
                     likedFilmIds.add(swipe.getFilmId());
                 }
             }
-            // Récupére les films correspondant aux ID des films aimées
             return movieRepository.findByIdIn(likedFilmIds);
         }
     }
