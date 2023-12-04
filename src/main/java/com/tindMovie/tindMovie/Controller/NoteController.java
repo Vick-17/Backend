@@ -17,8 +17,6 @@ public class NoteController {
     private NoteRepository noteRepository;
 
 
-
-    @CrossOrigin
     @PostMapping(value = "/addNote")
     @ResponseStatus(HttpStatus.CREATED)
     public NoteEntity addNote(@RequestBody NoteEntity note) {
@@ -34,7 +32,6 @@ public class NoteController {
         }
     }
 
-    @CrossOrigin
     @GetMapping(value = "/getNote/{movieId}")
     @ResponseStatus(HttpStatus.OK)
     public double getMoyenne(@PathVariable Long movieId) {

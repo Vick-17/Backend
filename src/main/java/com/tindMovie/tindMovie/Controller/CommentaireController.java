@@ -14,7 +14,6 @@ public class CommentaireController {
     @Autowired
     private CommentaireRepository commentRepo;
 
-    @CrossOrigin
     @PostMapping("/addComment")
     @ResponseStatus(HttpStatus.CREATED)
     public CommentaireEntity addComment(@RequestBody CommentaireEntity commentaire) {
@@ -30,7 +29,6 @@ public class CommentaireController {
         }
     }
 
-    @CrossOrigin
     @GetMapping(value = "getComment/{movieId}")
     @ResponseStatus(HttpStatus.OK)
     public List<CommentaireEntity> getCommentByMovie(@PathVariable Long movieId) {

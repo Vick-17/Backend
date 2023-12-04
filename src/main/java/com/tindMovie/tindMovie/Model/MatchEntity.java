@@ -4,22 +4,26 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
 @Getter
+@Entity
 @Setter
-@Table(name = "match") // Assurez-vous que le nom de la table correspond à votre schéma de base de données
+@Table(name = "match")
 public class MatchEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Getter
     @Column(name = "user_id1")
     private Long userId1;
 
+    @Getter
     @Column(name = "user_id2")
     private Long userId2;
 
+    @Getter
     @Column(name = "film_id")
     private Long filmId;
+
 
 }

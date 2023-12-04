@@ -21,12 +21,9 @@ public class UsersEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  private String name;
-  private int age;
   private String email;
   private String password;
   private String username;
-  private String country;
   private Long IdPartenaire;
 
   @Column(name = "image_name")
@@ -38,6 +35,7 @@ public class UsersEntity {
    * Attention, le contenu du fichier est stocké de manière temporaire (en mémoire
    * ou sur le disque)
    */
+  @Getter
   @JsonIgnore
   @Transient
   private MultipartFile imageFile;
@@ -55,10 +53,6 @@ public class UsersEntity {
 
   public void setImageFile(MultipartFile imageFile) {
     this.imageFile = imageFile;
-  }
-
-  public MultipartFile getImageFile() {
-    return imageFile;
   }
 
 }
