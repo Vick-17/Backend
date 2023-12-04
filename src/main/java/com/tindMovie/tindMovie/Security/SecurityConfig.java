@@ -74,9 +74,9 @@ public class SecurityConfig {
 
     private CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(Arrays.asList("*"));
-        configuration.setAllowedHeaders(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("*"));
+        configuration.setAllowedOriginPatterns(Arrays.asList("https://tind-movie.vercel.app/"));
+        configuration.setAllowedHeaders(Arrays.asList("X-My-Header", "Content-Type", "Authorization"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
         configuration.setExposedHeaders(Arrays.asList("access_token"));
         configuration.setAllowCredentials(true);
 
