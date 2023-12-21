@@ -19,8 +19,10 @@ public class MovieEntity {
     private String dates;
     private String duree;
     private String image;
-
     private String synopsis;
+
+    @ManyToMany(mappedBy = "movie")
+    
 
     @Column(name = "commentaire_id")
     private Long commentaireId;
