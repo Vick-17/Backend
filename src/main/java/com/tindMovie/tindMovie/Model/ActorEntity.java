@@ -18,6 +18,13 @@ public class ActorEntity {
     @Column(name = "actor_name")
     private String actorName;
 
+    @ManyToMany
+    @JoinTable(
+        name="actor_movie",
+        joinColumns = @JoinColumn(name = "actor_id"),
+        inverseJoinColumns = @JoinColumn(name = "movie_id"))
+    private MovieEntity movie;
+
     @Column(name = "movie_ids")
     private Long[] movieIds;
 }
